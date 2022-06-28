@@ -11,13 +11,13 @@ This script takes a spreadsheet with rows = words; cols = reference, hypothesis,
 and calculates the cohen kappa score for transcription and prompt.
 """
 
-if len(sys.argv) != 4:
-    raise ValueError("Please call this script with ADAPT_scoring.py [file to score] [kappa output file] [correct% output file]")
+# if len(sys.argv) != 4:
+#     raise ValueError("Please call this script with ADAPT_scoring.py [file to score] [kappa output file] [correct% output file]")
 
 # file to score path + outfile path here
 adapt_excel_path = sys.argv[1]
-adapt_kappa_path = sys.argv[2]
-binary_score_path = sys.argv[3]
+# adapt_kappa_path = sys.argv[2]
+# binary_score_path = sys.argv[3]
 
 # read the file
 df = pd.read_excel(adapt_excel_path, index_col="wav_id")
@@ -53,18 +53,34 @@ print(f"Items: {len(df2)}")
 df2 = df2.transpose()
 print(f"Variables: {len(df2)}")
 
-# elicit relevant rows into vars
+# elicit relevant rows into lists
 prompts = df2.loc["aligned_prompt"]
 transcripts = df2.loc["aligned_trans"]
 correctness_marks = df2.loc["correctness"]
 
 # calculate Cohen's kappa for selected rows
-print(f"Calculating kappa score for prompts and transcripts...")
-k_score = kappa(prompts, transcripts)
+# print(f"Calculating global kappa score for references and hypotheses...")
+# k_score = kappa(prompts, transcripts)
 
 # get nrows incorrect and calculate degree correct
-correct_deg = len([c for c in correctness_marks if c == 1])/len(correctness_marks)
+# correct_deg = len([c for c in correctness_marks if c == 1])/len(correctness_marks)
 
 # write scores to output files
-os.system(f"echo 'Kappa score for prompts and transcripts is {k_score}' | tee {adapt_kappa_path}")
-os.system(f"echo 'Degree binary correct for prompts and transcripts is {correct_deg}' | tee {binary_score_path}")
+# os.system(f"echo 'Kappa score for prompts and transcripts is {k_score}' | tee {adapt_kappa_path}")
+# os.system(f"echo 'Degree binary correct for prompts and transcripts is {correct_deg}' | tee {binary_score_path}")
+
+# now extract only words marked as incorrect by ADAPT to investigate
+incorrect_items = df.loc[df["correct"] == 0]
+print("Incorrect items")
+print(incorrect_items)
+print()
+
+error_items = df.loc[df["dist_score_prompt_trans"] != 0]
+print("Error items: dist not 0")
+print(error_items)
+print()
+
+questionable = df.loc[(df["dist_score_prompt_trans"] != 0) & (df["correct"] == 1)]
+print("Questionable items: dist not 0 but correct")
+print(questionable)
+print()
