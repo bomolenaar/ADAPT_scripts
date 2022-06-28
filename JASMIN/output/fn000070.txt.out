@@ -1,0 +1,23 @@
+Reference, Hypothesis, Dist_score, Nr_of_sub, Nr_of_del, Nr_of_ins
+het|is|zondag|en|Joris|verveelt|zich.,het|is|zondag|en|Joris|verveelt|zich.,0,0,0,0
+dan|hoort|hij|de|bel.,dan|hoort|hij|de|bel.,0,0,0,0
+Joris|loopt|naar|de|deur|en|doet|open.,Joris|loopt|naar|de|deur|en|doet|open.,0,0,0,0
+er|staat|een|meisje|op|de|stoep.,er|staat|één|meisje|op|de|stoep.,4.0,2,0,0
+kan|iemand|een|handje|helpen?|vraagt|ze.,kan|iemand|één|handje|helpen?|vraagt|ze.,4.0,2,0,0
+mijn|auto|heeft|een|lekke|band.,mijn|auto|heeft|een|lekke|band.,0,0,0,0
+ook|moeder|en|vader|komen|nu|kijken.,ook|moeder|en|vader|komen|nu|kijken.,0,0,0,0
+vader|wil|de|band|wel|v--erv-angen.,vader|wil|de|band|wel|v|ver-vangen-,5.0,0,2,3
+kijk|maar|goed,|Joris,|zegt|hij|stoer.,kijk|maar|goed-|Joris-|zegt|hij|stoer.,2.0,0,2,0
+eerst|neemt|hij|de--|wieldop|weg.,eerst|neemt|hij|-één|wieldop|weg.,5.0,1,1,2
+dan|haalt|hij-|een|krik|uit|de|koffer---.,dan|h-a--|halt|één|krik|uit|de|kofferbak.,15.0,4,3,4
+zo|kan|hij|één|kant|van|de|auto|optillen.,zo|kan|hij|één|kant|van|de|auto|optillen.,0,0,0,0
+de|lekke|band|schroeft|hij|los.,de|lekke|band|schroeft|hij|los.,0,0,0,0
+dan|k------------an|----de|nieuwe|band|erop.,dan|komt|een...|dan|kan|de|nieuwe|band|erop.,16.0,0,0,16
+ten|slotte|gaat|de|dop|weer|op|het|wiel.,ten-slotte|gaat|de|dop|weer|op|het|wiel.,1.0,0,1,0
+de|handen|van|vader|zijn|erg|zwart.,de|handen|van|vader|zijn|erg|zwart.,0,0,0,0
+en|op|zijn|wang|zit|een|veeg.,en|op|zijn|wang|zit|één|veeg.,4.0,2,0,0
+maar|dat|is|niet|erg.,maar|dat|is|niet|erg.,0,0,0,0
+Joris|kijkt|hem|vol|trots|aan.,Joris|kijkt|hem|vol|trots|aan.,0,0,0,0
+en|van|m---------------oeder|krijgt|hij|een|zoen.,en|van|mijn...|en|van|moeder|krijgt|hij|één|zoen.,19.0,2,0,15
+blij|rijdt|h----et|meisje|weer|naar|huis.,blij|rijdt|hij|het|meisje|weer|naar|huis.,4.0,0,0,4
+zo|was|het|toch|geen|saaie|dag!,zo|was|het|toch|geen|saaie|dag.,2.0,1,0,0

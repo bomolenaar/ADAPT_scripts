@@ -1,0 +1,23 @@
+Reference, Hypothesis, Dist_score, Nr_of_sub, Nr_of_del, Nr_of_ins
+Jeroen|is|onze|buurman.,Jeroen|is|onze|buurman.,0,0,0,0
+hij|houdt|van|grapjes|en|is|altijd|vrolijk.,hij|houdt|van|grapjes|en|is|altijd|vrolijk.,0,0,0,0
+wanneer|we|-------------voetballen,|doet|hij|graag|mee.,wanneer|we|m|wanneer|we|voetballen-|doet|hij|graag|mee.,14.0,0,1,13
+maar|nu|is|hij|verliefd.,maar|nu|is|hij|verliefd.,0,0,0,0
+nu|heeft|hij|geen|zin|meer|in|spelen.,nu|heeft|hij|geen|zin|meer|in|spelen-,1.0,0,1,0
+hij|denkt|alleen|maar|aan|haar-|en|loopt|met|zijn|-----hoofd|in|de|wolken.,hij|denkt|alleen|maar|aan|haar.|en|loopt|met|zijn|zijn|hoofd|in|de|wolken.,6.0,0,0,6
+mijn|mama|zegt|dat|dat|normaal|is,|als|je|pas|verliefd|bent.,mijn|mama|zegt|dat|dat|normaal|is-|als|je|pas|verliefd|bent.,1.0,0,1,0
+en|dat|het|een|heel|fijn|gevoel|is.,en|dat|het|één|heel|fijn|gevoel|is.,4.0,2,0,0
+we|stellen|hem|wel|honderd|vragen.,we|stellen|hem|wel|honderd|vragen.,0,0,0,0
+is|---ze|knap-|en|kan|ze|goed|voetballen?,is|is|ze|knap?|en|kan|ze|goed|voetballen?,4.0,0,0,4
+zijn|jullie|al|samen|naar|de|film|geweest?,zijn|jullie|al|samen|naar|de|film|geweest?,0,0,0,0
+wanneer|zien|we|haar|een|keer?,wanneer|zien|we|haar|één|keer?,4.0,2,0,0
+haar|naam|is|An--n-eleen,|vertelt|hij.,haar|naam|is|An|Anneleen-|vertelt|hij.,4.0,0,1,3
+ze|is|heel|sportief|maar|ze|kan|niet|zwemmen.,ze|is|heel|sportief|maar|ze|kan|niet|zwemmen.,0,0,0,0
+ze|speelt|wel|goed|basketbal.,ze|speelt|wel|goed|basketbal.,0,0,0,0
+en|net|als|ik,|---houdt|--ze|---------------van|muziek.,en|net|als|ik-|ik|houdt|f|ze|uh|ik|houdt|ze|van|muziek.,21.0,0,1,20
+Jeroen|vertelt|dat|ze|niet|kan|lopen,|ze|zit|in|een|rolstoel.,Jeroen|vertelt|dat|ze|niet|kan|lopen.|ze|zit|in|een|rolstoel.,2.0,1,0,0
+haar|twee|benen|zijn|verlamd,|-----zo|is|ze|geboren.,haar|twee|benen|zijn|verlamd.|ggg.|zo|is|ze|geboren.,7.0,1,0,5
+de|bus|nemen|of|ergens|aanbellen|is|voor|haar|niet|gemakkelijk.,de|bus|nemen|of|ergens|aanbellen|is|voor|haar|niet|gemakkelijk.,0,0,0,0
+dan|verklapt|hij|dat|ze|snel|zullen|samen|wonen.,dat|verklapt|hij|dat|ze|snel|zullen|samen|wonen.,2.0,1,0,0
+en|dat|Anneleen|dan|onze|buurvrouw|wordt.,en|dat|Anneleen|dan|onze|buurvrouw|wordt.,0,0,0,0
+dan|zullen|we|haar|vaak|genoeg|kunnen|zien!,dan|zullen|we|haar|vaak|genoeg|kunnen|zien.,2.0,1,0,0

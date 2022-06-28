@@ -1,0 +1,21 @@
+Reference, Hypothesis, Dist_score, Nr_of_sub, Nr_of_del, Nr_of_ins
+mijn|opa|heeft|wel|twintig|duiven.,mijn|opa|heeft|wel|twintig|duiven.,0,0,0,0
+hij|geeft|ze|allemaal|een|naam.,hij|geeft|ze|allemaal|één|naam.,4.0,2,0,0
+ze|wonen|in|een|hok|in|de|tuin.,ze|wonen|in|één|hok|in|de|tuin.,4.0,2,0,0
+en|ze|krijgen|elke|dag|granen,|zaden|en|peulvruchten|te|eten.,en|ze|krijgen|elke|dag|granen-|zanen|en|peulvruchten|te|eten.,3.0,1,1,0
+die|hebben|ze|nodig|om|voldoende|energie|te|hebben|en|om|de|temperatuur|van|hun|lichaam|op|peil|te|kunnen|houden.,die|hebben|ze|nodig|om|voldoende|energie|te|hebben|en|om|de|temperatuur|van|hun|lichaam|op|peil|te|kunnen|houden.,0,0,0,0
+opa|vertelde|me|dat|er|veel|soorten|duiven|bestaan.,opa|vertelde|me|dat|er|veel|soorten|duiven|bestaan.,0,0,0,0
+eén|van|hen|is|de|postduif.,één|van|hen|is|de|postduif.,2.0,1,0,0
+dat|is|een|duif|die|een|heel|gro-te|afstand|in|één|keer|kan|afleggen-|en|gemakkelijk|de|weg|naar|huis|terugvindt.,dat|is|een|duif|die|een|heel|groot-|afstand|in|één|keer|kan|afleggen.|en|gemakkelijk|de|weg|naar|huis|terugvind-.,4.0,0,2,2
+en|daar|heeft|die|duif|geen|kompas|of|landkaart|voor|nodig.,en|daar|heeft|die|duif|geen|kompas---|landkaart|voor|nodig.,3.0,0,3,0
+hij|weet|de|weg|door|naar|de|zon|te|kijken!,hij|weet|de|weg|door|naar|de|zon|te|kijken.,2.0,1,0,0
+daarom|werden|-------------------------ze|in|de|tijd|van|----de|oude|Romeinen|en|Grieken|gebruikt|om|berichten|te|versturen.,daarom|werden|er|erin...|daarom|werden|ze|in|de|tijd|van|van|de|oude|Romeinen|en|Grieken|gebruikt|om|berichten|te|versturen.,29.0,0,0,29
+toen|had|men|immers|nog|geen|auto|of|vliegtuig|om|---post|mee|te|vervoeren.,toen|had|men|immers|nog|geen|auto|of|vliegtuig|om|de|post|mee|te|vervoeren.,3.0,0,0,3
+de|duiven|droegen|dan|kleine|berichtjes|met|zich|mee|---in|een|kokertje|aan|hun|poot.,de|duiven|droegen|dan|kleine|berichtjes|met|zich|mee|en|in|één|kokertje|aan|hun|poot.,7.0,2,0,3
+nu|zorgt|de|postbode|dat|je|---brief|in|de|juiste|bus|terechtkomt.,nu|zorgt|de|postbode|dat|je|de|brief|in|de|juiste|bus|terechtkomt.,3.0,0,0,3
+toch|zijn|---veel|mensen|in|Nederland|en|België|lid-|van|een|postduivenv---e--reniging.,toch|zijn|er|veel|mensen|in|Nederland|en|België|lift|van|een|postduiven-fou-vereniging-,14.0,1,3,9
+we|----------noemen|ze|duivenmelkers.,we|doe...|we|noemen|ze|duivenmelkers.,10.0,0,0,10
+maar|ze|gebruiken|hun|duiven|alleen|nog|-----voor|de|sport.,maar|ze|gebruiken|hun|duiven|alleen|nog|maar|voor|de|sport.,5.0,0,0,5
+de|duiven|worden|-----goed|getraind|om|te|kunnen|meedoen|aan|----wedstrijden.,de|duiven|worden|heel|goed|getraind|om|te|kunnen|meedoen|aan|een|wedstrijd--.,11.0,0,2,9
+als|je|d---uif|-a-l-s--|eerste|thuiskomt,|dan|heb|je|gewonnen.,als|je|de|duif|voor|het|eerst-|thuiskomt-|dan|heb|je|gewonnen.,16.0,3,2,8
+en|dan|win|je|geld|of|een|andere|leuke|prijs!,en|dan|win|je|geld|of|een|andere|leuke|prijs.,2.0,1,0,0

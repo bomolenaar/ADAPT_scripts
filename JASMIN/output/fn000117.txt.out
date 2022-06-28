@@ -1,0 +1,21 @@
+Reference, Hypothesis, Dist_score, Nr_of_sub, Nr_of_del, Nr_of_ins
+Els|en|Bert|spelen|---tikkertje.,Els|en|Bert|spelen|re|tikkertje-,4.0,0,1,3
+ik|krijg|--je|------------wel,|roept|Bert.,ik|krijg|w|je|ik|krijg|je|wel-|roept|Bert.,15.0,0,1,14
+maar|Els|loopt|de|gang|in.,maar|Els|loopt|de|gang|in.,0,0,0,0
+pak|me|dan,|als|je|kan!,pak|me|dan-|als|je|kan.,3.0,1,1,0
+Bert|rent|snel|achter|--haar|-a--a-----n.,Bert|rent|snel|achter|n|haar|na|haar|aan.,10.0,0,0,10
+stop,|hijgt|Els,|er|is|post.,stop-|hijgt|Els-|er|is|post.,2.0,0,2,0
+er|ligt|een|brief|in|de|bus.,er|ligt|een|brief|in|de|bus.,0,0,0,0
+van|wie|is|die?|vr-----aagt|ze|z---ich|af.,van|wie|is|die-|vrie|vraagt|ze|ze|zich|af.,9.0,0,1,8
+ook|Bert|denkt|heel|diep|na.,ook|Bert|denkt|heel|diep|na.,0,0,0,0
+samen|maken|ze|de|brief|open.,samen|maken|ze|de|brief|open.,0,0,0,0
+er|zit|een|grote,|roze|kaart|in.,er|zit|een|grote-|roze|kaart|in.,1.0,0,1,0
+de|kaart|brengt|g--oed|nieuws.,de|kaart|brengt|g|goed|nieuws.,2.0,0,0,2
+er|is|een|kindje|geboren,|een|meisje!,er|is|een|kindje|geboren-|een|meisje.,3.0,1,1,0
+papa|leest|de|kaart|o--o-k.,papa|leest|de|kaart|op|ook.,3.0,0,0,3
+wil|je|het|kindje|zien?|vraagt|papa.,wil|je|het|kindje|zien?|vraagt|papa.,0,0,0,0
+ja,|roepen|Bert|en|Els.,ja-|roepen|Bert|en|Els.,1.0,0,1,0
+ze|dansen|rond|---------d--e|tafel.,ze|dansen|rond|en|in|rond|de|tafel-,12.0,0,1,11
+ze|doen|heel|gek|en|wild.,ze|doen|heel|gek|en|wild.,0,0,0,0
+en|dan|knutselen|we|een|pakje,|zegt|papa.,en|dan|knutselen|we|een|pakje-|zegt|papa.,1.0,0,1,0
+dat|vind-----en|ze|een|leuk|plan.,dat|vind|vinden|ze|een|leuk|plan.,5.0,0,0,5

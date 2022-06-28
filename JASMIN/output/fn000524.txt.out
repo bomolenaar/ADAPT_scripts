@@ -1,0 +1,23 @@
+Reference, Hypothesis, Dist_score, Nr_of_sub, Nr_of_del, Nr_of_ins
+vroeger|leefden|er|heel|veel|soorten|Indianen.,vroeger|leefden|er|heel|veel|soorten|indianen.,0.0,1,0,0
+die|woonden|in|het|bos,|de|bergen|of|in|de|woestijn.,die|woonden|in|het|bos-|de|bergen|of|in|de|woestijn.,1.0,0,1,0
+soms|waren|het|no---maden.,soms|waren|het|no|nomaden.,3.0,0,0,3
+dat|zijn|mensen|die|geen|vaste|plaats|hadden|om|te|wonen.,dat|zijn|mensen|die|geen|vaste|plaats|hadden|om|te|wonen.,0,0,0,0
+ze|moesten|hun|kamp|steeds|verplaatsen.,ze|moesten|hun|kamp|steeds|verplaatsen.,0,0,0,0
+dat|deden|ze|om|de|bizons|te|volgen.,dat|deden|ze|om|de|bizons|te|volgen.,0,0,0,0
+die|hadden|ze|nodig|om|te|kunnen|leven.,die|hadden|ze|nodig|om|te|kunnen|leven.,0,0,0,0
+voor|ons|zijn|-----lezen|en|schrijven|heel|belangrijk.,voor|ons|zijn|zijn|lezen|en|schrijven|heel|belangrijk.,5.0,0,0,5
+maar|voor|----de|Indianen|was|dat|niet|zo.,maar|voor|hun|de|Indianen|was|dat|niet|zo.,4.0,0,0,4
+voor|hen|moest|een|jongen|een|goede|jager|en|krijger|worden.,voor|hen|moest|een|jonger|een|goede|jarig-e-|krijger|worden.,10.0,4,2,0
+en|een|meisje|moest|goed|kunnen|koken.,en|een|meisje|moest|goed|kunnen|koken.,0,0,0,0
+en|dat|leerden|ze|niet|op|school.,en|dat|leerden|ze|niet|op|school.,0,0,0,0
+de|va-der,|de|gro-------o-tvaders|en|de|ooms|vertelden|de|kleine|jongen|alles---|ov--er|----d-e|jac--h----t|-e--n|--d------------e-|---oorlog.,de|veider-|de|grote|v|grootvaders|en|de|ooms|vertelde-|de|kleine|jongen|a-l-s...|uh|dit|woordje|kan|'k|niet|lezen|omdat|uh...|alles|de|oorlog.,66.0,8,4,46
+ze|toonden|hem|hoe|je|he-t|spoor|van|een|dier|volgt|en|hoe|je|een|boog|opspant.,ze|toonden|hem|hoe|je|-een|spoor|van|een|dier|volgt|en|hoe|je|een|boog|opspant-,5.0,1,2,1
+meisjes|d-e-de--n|niet|mee|aan|de|jacht|of|de|oorlog.,meisjes|die|deden|niet|mee|aan------------|de|oorlog.,16.0,0,12,4
+ze|leerden|koken|e--n|het|huishouden|doen---.,ze|leerden|koken|e|en|het|huishouden|doen|ze.,5.0,0,0,5
+dat|zou|later|immers|hun|taak|zijn.,dat|zou|later|immers|hun|taak|zijn.,0,0,0,0
+daarom|hielpen|ze|hun|moeder|al|heel|jong|met|fruit|plukken|en|hout|zoeken.,daarom|hielpen|ze|hun|moeder|al|heel|jong|met|fruit|plukken|en|hout|zoeken.,0,0,0,0
+ze|zorgden|ook|vaak|voor|hun|kleine|broertjes|en|zusjes.,ze|zorg-en|ook|vaak|voor|hun|kleine|broertjes|en|zusjes.,1.0,0,1,0
+zo|maakten|ze|zich|klaar|voor|hun|rol|als|moeder.,zo|maakten|ze|zich|klaar|voor|hun|rol|als|moeder.,0,0,0,0
+had|jij|graag|als|Indiaan|geboren|willen|zijn?,had|jij|graag|als|indiaan|geboren|willen|zijn?,0.0,1,0,0
+of|zou|je---|je|klas|-e---n|de|school|dan|miss-------en?,of|zou|je...|je|klas|i-s|en|de|school|dan|missch|missen.,17.0,1,1,14
