@@ -1,8 +1,8 @@
-## ADAPT_scripts
+# ADAPT_scripts
 
 Scripts I use to align transcriptions of speech and score the alignment.
 
-# Call as follows:
+## Call as follows:
 
 1.  gen_dfs_BM.py           --> creates a .xlsx file with columns `wav_id` (=filename), `reference` (=gold standard), `hypothesis` (=attempt transcript).
     Possible modes: `MT_PR, AO_PR, AO_MT, (FD)`.
