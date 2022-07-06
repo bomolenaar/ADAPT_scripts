@@ -16,6 +16,8 @@ and calculates the cohen kappa score for transcription and prompt.
 
 # file to score path + outfile path here
 adapt_excel_path = sys.argv[1]
+error_words_excel_path = adapt_excel_path.rsplit('.', 1)[0] + "_error_words.xlsx"
+error_sents_excel_path = adapt_excel_path.rsplit('.', 1)[0] + "_error_sents.xlsx"
 # adapt_kappa_path = sys.argv[2]
 # binary_score_path = sys.argv[3]
 
@@ -51,36 +53,46 @@ print(f"Items: {len(df2)}")
 
 # transpose rows/cols to make rows = words
 df2 = df2.transpose()
-print(f"Variables: {len(df2)}")
+print(f"Variables: {len(df2)}\n")
 
 # elicit relevant rows into lists
 prompts = df2.loc["aligned_prompt"]
 transcripts = df2.loc["aligned_trans"]
 correctness_marks = df2.loc["correctness"]
 
-# calculate Cohen's kappa for selected rows
+# # calculate Cohen's kappa for selected rows
 # print(f"Calculating global kappa score for references and hypotheses...")
 # k_score = kappa(prompts, transcripts)
 
-# get nrows incorrect and calculate degree correct
+# # get nrows incorrect and calculate degree correct
 # correct_deg = len([c for c in correctness_marks if c == 1])/len(correctness_marks)
 
-# write scores to output files
+# # write scores to output files
 # os.system(f"echo 'Kappa score for prompts and transcripts is {k_score}' | tee {adapt_kappa_path}")
 # os.system(f"echo 'Degree binary correct for prompts and transcripts is {correct_deg}' | tee {binary_score_path}")
 
 # now extract only words marked as incorrect by ADAPT to investigate
 incorrect_items = df.loc[df["correct"] == 0]
-print("Incorrect items")
-print(incorrect_items)
-print()
+# incorrect_items.to_excel(error_words_excel_path)
+print("Incorrect items:", len(incorrect_items))
 
-error_items = df.loc[df["dist_score_prompt_trans"] != 0]
-print("Error items: dist not 0")
-print(error_items)
-print()
+deg_incor_w = len(incorrect_items)/len(df)
+print("Degree incorrect items:", deg_incor_w, '\n')
 
-questionable = df.loc[(df["dist_score_prompt_trans"] != 0) & (df["correct"] == 1)]
-print("Questionable items: dist not 0 but correct")
-print(questionable)
-print()
+incorrect_list = sorted(list({wav_id for wav_id, row in incorrect_items.iterrows()}))
+incorrect_sents = pd.DataFrame(df.loc[incorrect_list])
+# incorrect_sents.to_excel(error_sents_excel_path)
+print("Incorrect sentences:", len(incorrect_list))
+
+deg_incor_s = len(incorrect_sents.index.unique())/len(df.index.unique())
+print("Degree incorrect sentences:", deg_incor_s, '\n')
+
+# error_items = df.loc[df["dist_score_prompt_trans"] != 0]
+# print("Error items: dist not 0")
+# print(error_items)
+# print()
+#
+# questionable = df.loc[(df["dist_score_prompt_trans"] != 0) & (df["correct"] == 1)]
+# print("Questionable items: dist not 0 but correct")
+# print(questionable)
+# print()
