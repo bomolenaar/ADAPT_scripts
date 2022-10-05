@@ -23,8 +23,8 @@ error_sents_excel_path = adapt_excel_path.rsplit('.', 1)[0] + "_error_sents.xlsx
 
 # read the file
 df = pd.read_excel(adapt_excel_path, index_col="wav_id")
-df['aligned_prompt'] = df['aligned_prompt'].astype(str)
-df['aligned_trans'] = df['aligned_trans'].astype(str)
+# df.columns[6] = df.columns[6].astype(str)
+# df.columns[7] = df.columns[7].astype(str)
 ls = []
 # outliers = []
 # maxdist = 10
@@ -48,7 +48,7 @@ for wav_id, row in df.iterrows():
 # print(f'{len(outliers)} outliers @ max ADAPT edit dist {maxdist}')
 
 # create a new dataframe with just the rows we want (word_nr and correctness not currently used)
-df2 = pd.DataFrame(ls, columns=["wav_id", "word_nr", "aligned_prompt", "aligned_trans", "correctness"])
+df2 = pd.DataFrame(ls, columns=["wav_id", "word_nr", "aligned_ref", "aligned_hyp", "correctness"])
 print(f"Items: {len(df2)}")
 
 # transpose rows/cols to make rows = words
@@ -56,8 +56,8 @@ df2 = df2.transpose()
 print(f"Variables: {len(df2)}\n")
 
 # elicit relevant rows into lists
-prompts = df2.loc["aligned_prompt"]
-transcripts = df2.loc["aligned_trans"]
+prompts = df2.loc["aligned_ref"]
+transcripts = df2.loc["aligned_hyp"]
 correctness_marks = df2.loc["correctness"]
 
 # # calculate Cohen's kappa for selected rows
@@ -73,17 +73,22 @@ correctness_marks = df2.loc["correctness"]
 
 # now extract only words marked as incorrect by ADAPT to investigate
 incorrect_items = df.loc[df["correct"] == 0]
-# incorrect_items.to_excel(error_words_excel_path)
+# write list to excel
+incorrect_items.to_excel(error_words_excel_path)
 print("Incorrect items:", len(incorrect_items))
 
+# print the % of words marked as incorrect
 deg_incor_w = len(incorrect_items)/len(df)
 print("Degree incorrect items:", deg_incor_w, '\n')
 
+# make a list of all sentences with at least one word marked as incorrect (present in incorrect words list)
 incorrect_list = sorted(list({wav_id for wav_id, row in incorrect_items.iterrows()}))
 incorrect_sents = pd.DataFrame(df.loc[incorrect_list])
-# incorrect_sents.to_excel(error_sents_excel_path)
+# write list to excel
+incorrect_sents.to_excel(error_sents_excel_path)
 print("Incorrect sentences:", len(incorrect_list))
 
+# print the % of sentences marked as incorrect
 deg_incor_s = len(incorrect_sents.index.unique())/len(df.index.unique())
 print("Degree incorrect sentences:", deg_incor_s, '\n')
 

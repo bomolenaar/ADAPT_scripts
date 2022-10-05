@@ -6,6 +6,20 @@ import pandas as pd
 import sys
 import argparse
 
+""""
+@Author: Bai Yu
+@Author: Bo Molenaar
+@Date: 14 June 2022
+
+This script takes 2 directories of files, either orthographic transcriptions, prompts, ASR output or forced decoding
+results, and creates a table with the utterance ID and specified hypothesis and reference for that ID.
+There are different types of tables possible, i.e. different hyp/ref pairs, namely:
+. MT_PR (ort. trans : prompt);
+. AO_MT (ASR output : ort. trans);
+. AO_PR (ASR output : prompt);
+. FD (Forced Decoding results)
+"""
+
 parser = argparse.ArgumentParser()
 # type of table to make. options:
 # . MT_PR
@@ -90,6 +104,7 @@ def create_id_hyps_dict(folderpath):
             for line in range(len(lines)):
                 if f.endswith('.ctm'):
                     if '<unk>' in lines[line]:
+                        # print(file_id, lines[line])
                         text += ''
                     else:
                         text += lines[line].split(' ')[4] + ' '

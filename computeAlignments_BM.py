@@ -6,7 +6,7 @@ Created on Thu Sep  3 10:40:08 2020
 @last edited: 13 June 2022 by Bo Molenaar
 
 This script aligns the prompt (reference) and manual transcription of an audio file (hypothesis).
-Each reference and hypothesis file are a separate file, with extension .tg or .TextGrid
+Each reference and hypothesis file are a separate file.
 For each word in the prompt is decided whether it is correctly or incorrectly read in the audio file.
 
 """
@@ -18,20 +18,23 @@ import sys
 import adapt_graph_punct_capital_v4 as adapt_graph
 import re
 import pandas as pd
+from multiprocessing import Pool
 
 # to read
 path_to_xlsx_folder = sys.argv[1]
-path_to_prompt_trans = path_to_xlsx_folder + sys.argv[2]
+path_to_prompt_trans = path_to_xlsx_folder + '/tables/' + sys.argv[2]
 
 # to write
-path_to_adapt = path_to_xlsx_folder + sys.argv[3]
+path_to_adapt = path_to_xlsx_folder + '/adapt/' + sys.argv[3]
 
 
 def main():
 
+    mypool = Pool()
+
     ref_name_list, ref_trans_list = readReferenceFiles(path_to_prompt_trans)
     hyp_name_list, hyp_trans_list = readHypothesisFiles(path_to_prompt_trans)
-    
+
     #Preprocessing of transcriptions
     ref_trans_list = replace_spaces(ref_trans_list)
     hyp_trans_list = replace_spaces(hyp_trans_list)
@@ -39,7 +42,7 @@ def main():
     #Match hypothesis and reference transcription
     #Structure: name - ref - ref reversed - hyp - hyp reversed
     data = match_ref_hyp(ref_name_list, ref_trans_list, hyp_name_list, hyp_trans_list)
-    
+
     #Align the reversed ref and reversed hyp
     data_with_alignments = use_ADAPT_graph(data)
     
@@ -102,16 +105,19 @@ def main():
 #    print('merge df done!')
 
 
-"""
-This function extracts for every reference file (=prompt) in the directory two things:
-    - the name of the file
-    - the prompt transcription
-"""
 def readReferenceFiles(xlsx):
+    """
+    This function extracts for every reference file (=prompt) in the directory two things:
+        - the name of the file
+        - the prompt transcription
+    """
+
     df = pd.read_excel(xlsx)
     if "_MT." in xlsx:
         ref_list = df['Manual transcription'].to_list()
     elif "_PR." in xlsx:
+        ref_list = df['Prompt'].to_list()
+    else:  # ugly but works for now, expect bugs
         ref_list = df['Prompt'].to_list()
     name_list = df['wav_id'].to_list()
         
@@ -135,12 +141,13 @@ def readReferenceFiles(xlsx):
 #                    f.writelines(lines)
 
 
-"""
-This function extracts for every hypothesis file (=manual transcription of the audio file) in the directory two things:
-    - the name of the file
-    - the manual transcription
-"""
 def readHypothesisFiles(xlsx):
+    """
+    This function extracts for every hypothesis file (=manual transcription of the audio file) in the directory two things:
+        - the name of the file
+        - the manual transcription
+    """
+
     df = pd.read_excel(xlsx)
     if ("_MT" in xlsx) or ("_PR" in xlsx):
         hyp_list = df['ASR output'].to_list()
@@ -151,10 +158,11 @@ def readHypothesisFiles(xlsx):
     return name_list,hyp_list
 
 
-"""
-Replace each space with a pipe (= | ), such that the strings can be used as input to the ADAPT algorithm.
-"""
 def replace_spaces(trans_list):
+    """
+    Replace each space with a pipe (= | ), such that the strings can be used as input to the ADAPT algorithm.
+    """
+
     new_list = []
     for t in trans_list:
         if isinstance(t, float):
@@ -165,45 +173,48 @@ def replace_spaces(trans_list):
     return new_list
 
 
-"""
-Function that reverses a given string.
-"""
-def reverse(s): 
+def reverse(s):
+    """
+    Function that reverses a given string.
+    """
+
     str = "" 
     for i in s: 
       str = i + str
     return str
 
 
-"""
-This function creates a matrix in which the references and hypotheses with the same file name are matched.
-It also adds two extra comlumns, one with the reversed reference and one with the reversed hypothesis.
-"""
 def match_ref_hyp(ref_name_list, ref_trans_list, hyp_name_list, hyp_trans_list):
+    """
+    This function creates a matrix in which the references and hypotheses with the same file name are matched.
+    It also adds two extra columns, one with the reversed reference and one with the reversed hypothesis.
+    """
+
     data = []
     for i in range(len(ref_name_list)):
         sample = []
-        
+
         name = ref_name_list[i]
         sample.append(name)
-        
+
         ref = ref_trans_list[i]
         sample.append(ref)
         sample.append(reverse(ref))
-        
+
         hyp_idx = hyp_name_list.index(name)
         hyp = hyp_trans_list[hyp_idx]
         sample.append(hyp)
         sample.append(reverse(hyp))
-        
+
         data.append(sample)
     return data
-        
 
-"""
-This function aligns the reversed reference and the reversed hypothesis using a python version of ADAPT.
-"""
+
 def use_ADAPT_graph(data):
+    """
+    This function aligns the reversed reference and the reversed hypothesis using a python version of ADAPT.
+    """
+
     aligned_data = []
     count = 0
     
@@ -256,10 +267,11 @@ def use_ADAPT_graph(data):
     return aligned_data
         
 
-"""
-This function converts the format of the data from a "sentence" to a "word list"
-"""
 def change_format_to_wordlist(data_with_alignments):
+    """
+    This function converts the format of the data from a "sentence" to a "word list"
+    """
+
     word_list = []
     for sample in data_with_alignments:
 #        print(sample)
