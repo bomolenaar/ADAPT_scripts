@@ -12,13 +12,11 @@ For each word in the prompt is decided whether it is correctly or incorrectly re
 """
 import os
 import glob
-#import textgrid as tg
 import sys
 
 import adapt_graph_punct_capital_v4 as adapt_graph
 import re
 import pandas as pd
-from multiprocessing import Pool
 
 # to read
 path_to_xlsx_folder = sys.argv[1]
@@ -29,8 +27,6 @@ path_to_adapt = path_to_xlsx_folder + '/adapt/' + sys.argv[3]
 
 
 def main():
-
-    mypool = Pool()
 
     ref_name_list, ref_trans_list = readReferenceFiles(path_to_prompt_trans)
     hyp_name_list, hyp_trans_list = readHypothesisFiles(path_to_prompt_trans)

@@ -33,7 +33,7 @@ parser.add_argument("table_type", choices=["MT_PR", "AO_MT", "AO_PR", "FD"],
 parser.add_argument("hypotheses_path", help="Path to hypotheses to compare")
 if "FD" not in sys.argv[1]:
     parser.add_argument("references_path", help="Path to references to compare against")
-parser.add_argument("xlsx_path", help="Path to xlsx folder")
+parser.add_argument("tables_path", help="Path to tables folder")
 parser.add_argument("outfile", help="Path to xlsx output file")
 args = parser.parse_args()
 
@@ -66,7 +66,7 @@ path_to_hyps = args.hypotheses_path
 path_to_refs = args.references_path
 
 # to write
-path_to_xlsx_folder = args.xlsx_path
+path_to_xlsx_folder = args.tables_path
 path_to_xlsx_sentences = path_to_xlsx_folder + args.outfile
 
 
