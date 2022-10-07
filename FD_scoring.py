@@ -40,27 +40,34 @@ def words_confs(infile):
     Takes a directory with FD output, organises words and their confidence scores into lists,
     normalises erroneous FD scores and returns a global confidence score.
     :param infile: path to dir with your FD output
-    :return: global confidence score (for now)
+    :return: table with corrected confidence scores per word
     """
-    global_conf = 0
-    sent_confs = []
+    # global_conf = 0
+    # sent_confs = []
     if infile.endswith('.xlsx'):
         df = pd.read_excel(infile, index_col="wav_id")
+        words_ids = []
         words = []
         confs = []
 
         for wav_id, sentence, scores in df.itertuples():
-            for word in sentence.split(' '):
+            for word in sentence.rstrip(' ').split(' '):
                 words.append(word)
+                words_ids.append(wav_id)
             for score in scores.rstrip(' ').split(' '):
                 confs.append(fix_illegal_values(score))
 
-            sent_confs.append(np.mean(confs))
-        global_conf = np.mean(sent_confs)
+            # sent_confs.append(np.mean(confs))
+        # global_conf = np.mean(sent_confs)
+        full_table = pd.DataFrame(list(zip(words_ids, words, confs)), columns=["wav_id", "prompt", "conf"])
+        full_table = full_table.set_index("wav_id")
+    else:
+        raise TypeError("Please provide an xlsx input file.")
 
-    return global_conf
+    return full_table
 
 
-conf_score = words_confs(infile_path)
+conf_scores = words_confs(infile_path)
+conf_scores.to_excel(outfile_path)
 
-os.system(f"echo 'Confidence score for prompts and audio is {conf_score}' | tee {outfile_path}")
+print(f"Confidence scores for prompts and audio written to {outfile_path}")
