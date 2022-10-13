@@ -54,6 +54,8 @@ if "_" in mode:
         type2_name = "Manual transcription"
     elif "PR" in type2:
         type2_name = "Prompt"
+    path_to_refs = args.references_path
+
 else:
     # no 2nd filetype --> process FD results
     type1 = mode
@@ -63,7 +65,6 @@ else:
 
 # to read
 path_to_hyps = args.hypotheses_path
-path_to_refs = args.references_path
 
 # to write
 path_to_xlsx_folder = args.tables_path
@@ -96,15 +97,18 @@ def create_id_hyps_dict(folderpath):
     for f in os.listdir(folderpath):
         if (f.endswith('.ort')) or (f.endswith('.wav.txt')) or (f.endswith('.ctm') and 'bestsym' not in f):
             with open(os.path.join(folderpath, f), 'r', encoding='UTF-8') as fin:
-                lines = fin.readlines()
+                if os.path.getsize(os.path.join(folderpath, f)) == 0:
+                    hyp = ''
+                    lines = []
+                else:
+                    lines = fin.readlines()
+                # print(lines)
             file_id = f.split('.')[0]
-            # print(file_id)
             text = ""
             confs = ""
             for line in range(len(lines)):
                 if f.endswith('.ctm'):
                     if '<unk>' in lines[line]:
-                        # print(file_id, lines[line])
                         text += ''
                     else:
                         text += lines[line].split(' ')[4] + ' '
@@ -120,8 +124,10 @@ def create_id_hyps_dict(folderpath):
                             confs += str(line_fields[1]).strip('\n') + ' '
 
                 hyp = text.replace('\n', '').replace('<unk>', '').rstrip(' ').replace('  ', ' ')
-                id_hyps_dict[file_id] = hyp
-                id_conf_dict[file_id] = confs
+            # print(f"hypothesis: '{hyp}'")
+            id_hyps_dict[file_id] = hyp
+            # print(f"\nkey {file_id}\nhyp {hyp}")
+            id_conf_dict[file_id] = confs
             # print(f"{file_id} trans = {id_hyps_dict[file_id]}")
     # print(len(id_hyps_dict))
     if "FD" in type1:
@@ -146,7 +152,7 @@ def create_id_refs_dict(folderpath):
 
                 # print(f"line ID = {file_id}, prompt = {repr(prompt)}")
                 ref = text.replace('\n', '').replace('<unk>', '').rstrip(' ').replace('  ', ' ')
-                id_refs_dict[file_id] = ref
+            id_refs_dict[file_id] = ref
             # print(f"{file_id} trans = {id_refs_dict[file_id]}")
     # print(len(id_refs_dict))
     return id_refs_dict
@@ -213,6 +219,7 @@ def generate_xlsx(dict_in, xlsx_path):
         for key, value in dict_in.items():
             ref = value[type2_name]
             hyp = value[type1_name]
+            # print(f"\nkey {key}\nref {ref}\nhyp {hyp}")
             general_lst.append([key, ref, hyp])
         df = pd.DataFrame(general_lst)
         df.columns = ['wav_id', type2_name, type1_name]

@@ -31,17 +31,18 @@ def main():
     ref_name_list, ref_trans_list = readReferenceFiles(path_to_prompt_trans)
     hyp_name_list, hyp_trans_list = readHypothesisFiles(path_to_prompt_trans)
 
+
     #Preprocessing of transcriptions
     ref_trans_list = replace_spaces(ref_trans_list)
     hyp_trans_list = replace_spaces(hyp_trans_list)
-    
+
     #Match hypothesis and reference transcription
     #Structure: name - ref - ref reversed - hyp - hyp reversed
     data = match_ref_hyp(ref_name_list, ref_trans_list, hyp_name_list, hyp_trans_list)
 
     #Align the reversed ref and reversed hyp
     data_with_alignments = use_ADAPT_graph(data)
-    
+
 #    #Save matrix as dataframe and write dataframe to csv
 #    df_align = pd.DataFrame(data_with_alignments, columns = ["id", 'prompt', 'trans'])
 #    df_align.to_csv(path_to_alignment, index = False)
@@ -49,8 +50,7 @@ def main():
     
     #Convert format of data to word list
     data_as_wordlist = change_format_to_wordlist(data_with_alignments)
-#    print("data as wordlist: ",data_as_wordlist) #uncomment
-   
+
     # read comparison file
     df = pd.read_excel(path_to_prompt_trans)
     
@@ -162,7 +162,7 @@ def replace_spaces(trans_list):
     new_list = []
     for t in trans_list:
         if isinstance(t, float):
-            t = 'nan'
+            t = ''
         else:
             t = t.replace(" ", "|")
         new_list.append(t)
@@ -290,6 +290,8 @@ def change_format_to_wordlist(data_with_alignments):
                 r_list.append(align_ref[start_idx:first_wbn])
                 h_list.append(align_hyp[start_idx:first_wbn])
                 start_idx = first_wbn+1
+            r_list.append(align_ref[start_idx:])
+            h_list.append(align_hyp[start_idx:])
 
         ## Align hyp contains word boundaries
         else: 

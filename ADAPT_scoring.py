@@ -1,4 +1,3 @@
-from sklearn.metrics import cohen_kappa_score as kappa
 import pandas as pd
 import sys
 import os
@@ -13,14 +12,11 @@ This script takes a set of ADAPT output spreadsheets: 1 baseline Prompt-MT and a
 and calculates the cohen kappa score for agreement between the baseline and each ASR output.
 """
 
-if len(sys.argv) < 4:
-    raise ValueError("Please call this script with ADAPT_scoring.py [ADAPT baseline] [kappa output path] [any number of ADAPT ASR outputs]")
+if len(sys.argv) < 3:
+    raise ValueError("Please call this script with ADAPT_scoring.py [ADAPT baseline] [any number of ADAPT ASR outputs]")
 
-# files to score paths + outfile path here
+# ADAPT baseline file path
 adapt_baseline_path = sys.argv[1]
-# error_words_excel_path = adapt_excel_path.rsplit('.', 1)[0] + "_error_words.xlsx"
-# error_sents_excel_path = adapt_excel_path.rsplit('.', 1)[0] + "_error_sents.xlsx"
-kappas_dir = sys.argv[2]
 
 
 def read_adapt_table(adapt_path):
@@ -96,11 +92,6 @@ for sheetnr in range(0, len(sys.argv) - 3):
     ###
     # DEBUGGING snippet (keep!)
 
-    # base_refs = zip(ADAPT_base.loc["wav_id"], ADAPT_base.loc["aligned_ref"])
-    # ao_refs = zip(ADAPT_AO.loc["wav_id"], ADAPT_AO.loc["aligned_ref"])
-    # allrefs = zip_longest(base_refs, ao_refs, fillvalue="?")
-    # print(*list(allrefs), sep='\n')
-
     uniq_ids = sorted(list(set(ADAPT_base.loc["wav_id"])))
     base_id_counts = Counter(ADAPT_base.loc["wav_id"])
     ao_id_counts = Counter(ADAPT_AO.loc["wav_id"])
@@ -114,18 +105,9 @@ for sheetnr in range(0, len(sys.argv) - 3):
                 print(f"ID: {id}\tbase length: {base_id_counts[id]}\t ao length: {ao_id_counts[id]}\t<-- missing")
             else:
                 print(f"ID: {id}\tbase length: {base_id_counts[id]}\t ao length: {ao_id_counts[id]}")
-    print(f"\n{differences} differences in sentence lengths found")
-    print(f"\n{missing} missing sentences found")
+    print(f"{differences} differences in sentence lengths found")
+    print(f"{missing} missing sentences found\n")
 
     # END OF DEBUGGING
     ###
-
-    # # calculate Cohen's kappa for selected rows
-    # print(f"Calculating kappa score for MT {adapt_baseline_path} and ASR output {sheet}...")
-    # k_score = kappa(ADAPT_base_correct, ADAPT_AO_correct)
-    # print(f"Kappa score for MT and ASR output is {k_score}")
-
-    # # write scores to output files
-    # adapt_kappa_path = os.path.join(kappas_dir, sheet.rsplit('.')[0], '.txt')
-    # os.system(f"echo 'Kappa score for prompts and transcripts is {k_score}' | tee {adapt_kappa_path}")
 
