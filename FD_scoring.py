@@ -1,15 +1,12 @@
-from sklearn.metrics import cohen_kappa_score as kappa
 import sys
-import os
 import pandas as pd
-import numpy as np
 
 """"
 @author: Bo Molenaar
 @date: 14 June 2022
 @last-edited: 
-This script takes a spreadsheet with rows = words; cols = prompt, transcription, FD confidence score;
-and calculates sentence, speaker and global-level confidence scores.
+This script takes a spreadsheet with rows = sentences; cols = prompt/transcription, FD confidence score;
+and outputs these into word-level pairs.
 """
 
 if len(sys.argv) != 3:
@@ -20,18 +17,17 @@ infile_path = sys.argv[1]
 outfile_path = sys.argv[2]
 
 
-def fix_illegal_values(score):
+def fix_illegal_values_round(score):
     if 'nan' in score:
         score = 1
     elif '-nan' in score:
         score = 0
     else:
-        score = float(score)
-        if score < 0:
-            score = 0
-        elif score > 1:
-            score = 1
-    return score
+        score = min(max(float(score), 0), 1)
+    if type(score) == int:
+        return score
+    else:
+        return float(f"{score:.3f}")
 
 
 # read the files and get their confidence scores
@@ -42,25 +38,30 @@ def words_confs(infile):
     :param infile: path to dir with your FD output
     :return: table with corrected confidence scores per word
     """
-    # global_conf = 0
-    # sent_confs = []
     if infile.endswith('.xlsx'):
         df = pd.read_excel(infile, index_col="wav_id")
+        speaker_ids = []
+        sent_ids = []
         words_ids = []
         words = []
         confs = []
 
+        # iterate over rows and do some segmentation
         for wav_id, sentence, scores in df.itertuples():
-            for word in sentence.rstrip(' ').split(' '):
-                words.append(word)
-                words_ids.append(wav_id)
+            sent_words = sentence.rstrip(' ').split(' ')
+            for word in range(len(sent_words)):
+                words.append(sent_words[word])
+                speaker_id, sent_id, word_id = wav_id.split('_')[0], wav_id.split('_')[2], word
+                speaker_ids.append(speaker_id)
+                sent_ids.append(sent_id)
+                words_ids.append(word_id)
             for score in scores.rstrip(' ').split(' '):
-                confs.append(fix_illegal_values(score))
+                confs.append(fix_illegal_values_round(score))
 
-            # sent_confs.append(np.mean(confs))
-        # global_conf = np.mean(sent_confs)
-        full_table = pd.DataFrame(list(zip(words_ids, words, confs)), columns=["wav_id", "prompt", "conf"])
-        full_table = full_table.set_index("wav_id")
+        full_table = pd.DataFrame(
+            list(zip(speaker_ids, sent_ids, words_ids, words, confs)),
+            columns=["speaker", "sentence", "word_nr", "reference", "conf"]
+        ).set_index("speaker")
     else:
         raise TypeError("Please provide an xlsx input file.")
 
