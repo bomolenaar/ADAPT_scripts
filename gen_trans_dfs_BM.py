@@ -14,7 +14,8 @@ import argparse
 This script takes 2 directories of files, either orthographic transcriptions, prompts, ASR output or forced decoding
 results, and creates a table with the utterance ID and specified hypothesis and reference for that ID.
 There are different types of tables possible, i.e. different hyp/ref pairs, namely:
-. MT_PR (ort. trans : prompt);
+. PR_MT (ort. trans : prompt);
+. MT_PR (prompt; ort. trans);
 . AO_MT (ASR output : ort. trans);
 . AO_PR (ASR output : prompt);
 . FD (Forced Decoding results)
@@ -22,14 +23,15 @@ There are different types of tables possible, i.e. different hyp/ref pairs, name
 
 parser = argparse.ArgumentParser()
 # type of table to make. options:
+# . PR_MT
 # . MT_PR
 # . AO_MT
 # . AO_PR
 # . FD
-parser.add_argument("table_type", choices=["MT_PR", "AO_MT", "AO_PR", "FD"],
+parser.add_argument("table_type", choices=["MT_PR", "PR_MT", "AO_MT", "AO_PR", "FD"],
                     help="Specify the hypothesis and reference type.\n"
                          "FD = Forced Decoding, MT = Manual Transcriptions, AO = ASR Output\n"
-                         "Options: MT_PR, AO_MT, AO_PR, FD")
+                         "Options: MT_PR, PR_MT, AO_MT, AO_PR, FD")
 parser.add_argument("hypotheses_path", help="Path to hypotheses to compare")
 if "FD" not in sys.argv[1]:
     parser.add_argument("references_path", help="Path to references to compare against")
@@ -48,11 +50,13 @@ if "_" in mode:
     type2 = mode.split("_")[1]
     if "AO" in type1:
         type1_name = "ASR output"
-    elif "MT" in type1:
+    if "MT" in type1:
         type1_name = "Manual transcription"
+    if "PR" in type1:
+        type1_name = "Prompt"
     if "MT" in type2:
         type2_name = "Manual transcription"
-    elif "PR" in type2:
+    if "PR" in type2:
         type2_name = "Prompt"
     path_to_refs = args.references_path
 
@@ -95,7 +99,7 @@ def create_id_hyps_dict(folderpath):
     id_conf_dict = {}
 
     for f in os.listdir(folderpath):
-        if (f.endswith('.ort')) or (f.endswith('.wav.txt')) or (f.endswith('.ctm') and 'bestsym' not in f):
+        if (f.endswith('.prompt')) or (f.endswith('.ort')) or (f.endswith('.wav.txt')) or (f.endswith('.ctm') and 'bestsym' not in f):
             with open(os.path.join(folderpath, f), 'r', encoding='UTF-8') as fin:
                 if os.path.getsize(os.path.join(folderpath, f)) == 0:
                     hyp = ''
@@ -112,7 +116,7 @@ def create_id_hyps_dict(folderpath):
                         text += ''
                     else:
                         text += lines[line].split(' ')[4] + ' '
-                elif f.endswith('.ort'):
+                elif (f.endswith('.ort')) or (f.endswith('.prompt')):
                     text += lines[line] + ' '
                 elif "FD" in type1:
                     line_fields = lines[line].split('\t')

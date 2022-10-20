@@ -113,7 +113,7 @@ def readReferenceFiles(xlsx):
         ref_list = df['Manual transcription'].to_list()
     elif "_PR." in xlsx:
         ref_list = df['Prompt'].to_list()
-    else:  # ugly but works for now, expect bugs
+    else:
         ref_list = df['Prompt'].to_list()
     name_list = df['wav_id'].to_list()
         
@@ -145,8 +145,12 @@ def readHypothesisFiles(xlsx):
     """
 
     df = pd.read_excel(xlsx)
-    if ("_MT" in xlsx) or ("_PR" in xlsx):
+    if "AO_" in xlsx:
         hyp_list = df['ASR output'].to_list()
+    elif "PR_" in xlsx:
+        hyp_list = df['Prompt'].to_list()
+    elif "MT_" in xlsx:
+        hyp_list = df['Manual transcription'].to_list()
     else:
         hyp_list = df['Manual transcription'].to_list()
     name_list = df['wav_id'].to_list()
