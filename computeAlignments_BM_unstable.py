@@ -12,7 +12,6 @@ For each word in the prompt is decided whether it is correctly or incorrectly re
 """
 import os
 import glob
-#import textgrid as tg
 import sys
 
 import adapt_graph_punct_capital_v4 as adapt_graph
