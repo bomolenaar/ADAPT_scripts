@@ -1,9 +1,10 @@
+#!usr/bin/python3
 # -*- coding: utf-8 -*-
 """
 Created on Thu Sep  3 10:40:08 2020
 
 @author: Wieke Harmsen
-@last edited: 13 June 2022 by Bo Molenaar
+@Lastedited: 22 February 2023 by Bo Molenaar
 
 This script aligns the prompt (reference) and manual transcription of an audio file (hypothesis).
 Each reference and hypothesis file are a separate file.
@@ -30,7 +31,6 @@ def main():
 
     ref_name_list, ref_trans_list = readReferenceFiles(path_to_prompt_trans)
     hyp_name_list, hyp_trans_list = readHypothesisFiles(path_to_prompt_trans)
-
 
     #Preprocessing of transcriptions
     ref_trans_list = replace_spaces(ref_trans_list)
@@ -109,7 +109,7 @@ def readReferenceFiles(xlsx):
     """
 
     df = pd.read_excel(xlsx)
-    if "_MT." in xlsx:
+    if ("_MT." in xlsx) or ("reverse" in xlsx):
         ref_list = df['Manual transcription'].to_list()
     elif "_PR." in xlsx:
         ref_list = df['Prompt'].to_list()
@@ -139,15 +139,15 @@ def readReferenceFiles(xlsx):
 
 def readHypothesisFiles(xlsx):
     """
-    This function extracts for every hypothesis file (=manual transcription of the audio file) in the directory two things:
+    This function extracts for every hypothesis file (=transcription of the audio file) in the directory two things:
         - the name of the file
-        - the manual transcription
+        - the transcription
     """
 
     df = pd.read_excel(xlsx)
-    if "AO_" in xlsx:
+    if ("ASR_" in xlsx) or ("WHISPER_" in xlsx):
         hyp_list = df['ASR output'].to_list()
-    elif "PR_" in xlsx:
+    elif ("PR_" in xlsx) or ("reverse" in xlsx):
         hyp_list = df['Prompt'].to_list()
     elif "MT_" in xlsx:
         hyp_list = df['Manual transcription'].to_list()

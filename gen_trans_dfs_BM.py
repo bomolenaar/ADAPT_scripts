@@ -1,15 +1,16 @@
-import csv
+#!usr/bin/python3
+# -*- coding: utf-8 -*-
+
 from pathlib import Path
+import argparse
 import os
-import re
 import pandas as pd
 import sys
-import argparse
 
 """"
 @Author: Bai Yu
 @Author: Bo Molenaar
-@Date: 14 June 2022
+@Lastedited: 22 February 2023
 
 This script takes 2 directories of files, either orthographic transcriptions, prompts, ASR output or forced decoding
 results, and creates a table with the utterance ID and specified hypothesis and reference for that ID.
@@ -72,7 +73,7 @@ path_to_hyps = args.hypotheses_path
 
 # to write
 path_to_xlsx_folder = args.tables_path
-path_to_xlsx_sentences = path_to_xlsx_folder + args.outfile
+path_to_xlsx_sentences = os.path.join(path_to_xlsx_folder, args.outfile)
 
 
 def gen_dfs_and_xlsx(process_mode):
@@ -86,7 +87,6 @@ def gen_dfs_and_xlsx(process_mode):
         dict_sentences = create_general_dict(path_to_hyps)
     else:
         dict_sentences = create_general_dict(path_to_hyps, path_to_refs)
-        
     generate_xlsx(dict_sentences, path_to_xlsx_sentences)
     print('Saved trans xlsx files to xlsx folder!')
 
@@ -99,7 +99,7 @@ def create_id_hyps_dict(folderpath):
     id_conf_dict = {}
 
     for f in os.listdir(folderpath):
-        if (f.endswith('.prompt')) or (f.endswith('.ort')) or (f.endswith('.wav.txt')) or (f.endswith('.ctm') and 'bestsym' not in f):
+        if (f.endswith('.prompt')) or (f.endswith('.ort')) or (f.endswith('.txt')) or (f.endswith('.ctm') and 'bestsym' not in f):
             with open(os.path.join(folderpath, f), 'r', encoding='UTF-8') as fin:
                 if os.path.getsize(os.path.join(folderpath, f)) == 0:
                     hyp = ''
@@ -116,7 +116,7 @@ def create_id_hyps_dict(folderpath):
                         text += ''
                     else:
                         text += lines[line].split(' ')[4] + ' '
-                elif (f.endswith('.ort')) or (f.endswith('.prompt')):
+                elif (f.endswith('.ort')) or (f.endswith('.prompt')) or(f.endswith('.txt')):
                     text += lines[line] + ' '
                 elif "FD" in type1:
                     line_fields = lines[line].split('\t')
